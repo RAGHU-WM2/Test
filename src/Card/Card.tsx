@@ -24,10 +24,10 @@ const Card = () => {
     setIsCategoryView(!isCategoryView);
   };
 
-  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-  
+const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setSearchTerm(event.target.value);
+};
+
 
   const handleSearchInputClick = () => {
     navigate("/search");

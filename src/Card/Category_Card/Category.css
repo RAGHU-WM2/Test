@@ -35,12 +35,13 @@ scroll-behavior: smooth;
   font-size: 15px;
   font-weight: 200!important;
   color: grey;
+  cursor: pointer;
 }
 
 .amenities_bottom > button:hover {
   background-color: rgb(244, 244, 244);
   border-radius: 5px;
-  padding: 1px 10px;
+  /* padding: 1px 10px; */
   /* height: 2.1cm; */
 }
 /* CATEGORIES   STYLE  */
@@ -65,4 +66,12 @@ scroll-behavior: smooth;
   width: 214%;
   border-bottom: 1px solid rgb(238, 238, 238);
   line-height: 65px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.categories_list>ul>li:hover{
+  background-color: rgb(241, 241, 241);
+  width: 190%;
+  border-radius: 5px;
 }

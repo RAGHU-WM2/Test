@@ -21,6 +21,7 @@
   position: absolute;
   left: 1cm;
   top: 0.8cm;
+  cursor: pointer;
 }
 #locationsearch {
   display: flex;
@@ -38,6 +39,7 @@
   position: absolute;
   right: 1cm;
   top: 27px;
+  cursor: pointer;
 }
 
 #locationsearch {

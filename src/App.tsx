@@ -9,6 +9,7 @@ import useMapView from "./Sources/useMapview";
 import useVenue from "./Sources/useVenue";
 import './App.css'
 import Card from './Card/Card'
+import PolygonCard from "./Card/Polygon_Card/PolygonCard";
 
 
 export default function App() {
@@ -176,7 +177,7 @@ console.log("TOPLOCATIONS",venue?.venue.topLocations);
         </select>
       </div>
       <Card/>
-      
+      <PolygonCard/>
     </div>
   );
   

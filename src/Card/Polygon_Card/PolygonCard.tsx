@@ -1,8 +1,8 @@
 import React from 'react';
-
+import './Polygon.css'
 const Polygon_card = () => {
   return (
-    <div>
+    <div id='polygoncard'>
       <h2>Polygon Card Content</h2>
     </div>
   );
@@ -10,5 +10,4 @@ const Polygon_card = () => {
 
 export default Polygon_card;
 
-// Add the following line if there are no other exports in the file
-export {};
+

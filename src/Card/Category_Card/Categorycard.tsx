@@ -36,7 +36,7 @@ const Categorycard = () => {
         <div className="amenities_container">
           <div className="amenities_top">
             <h4>Amenities</h4>
-            <h6 style={{ fontSize: "12px" }}>See All</h6>
+            <h6 style={{ fontSize: "12px",cursor:"pointer" }}>See All</h6>
           </div>
           <div className="amenities_bottom">
             <button>

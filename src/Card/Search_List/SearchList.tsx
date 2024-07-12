@@ -84,22 +84,27 @@ const SearchList: React.FC<Props> = ({ searchTerm }) => {
       {!searchTerm && (
         <div className="search_top_header">
           <h4 style={{ fontWeight: "500", fontSize: "16px" }}>Most Popular</h4>
-          <img src={Fireicon} alt="" width={13} height={13} />
+          <img src={Fireicon} alt="fire icon" width={13} height={13} />
         </div>
       )}
       <div id="directory">
         {filteredCategories.map((category) => (
           <div className="categoryGroup" key={category.id}>
-            {searchTerm && <h4>{category.name}</h4>}
+            {searchTerm && <h4 >{category.name}</h4>}
             {category.locations && category.locations.length > 0 && (
               <div>
                 {category.locations.map((location: any) => ( // Adjust type as per your data structure
                   <div className="locationGroup" key={location.id}>
-                    <h4>{location.name}</h4>
+                    <div className="locationHeader">
+                      <img src={Fireicon} alt="fire icon" width={17}  />
+                      <h4>{location.name}</h4>
+                    </div>
                     {location.polygons && (
-                      <ul>
+                      <ul className="polygonList">
                         {location.polygons.map((polygon: MappedinPolygon, index: number) => (
-                          <li key={index}>{polygon.map.name}</li>
+                          <li key={index}>
+                            {polygon.map.name}
+                          </li>
                         ))}
                       </ul>
                     )}
