@@ -6,6 +6,7 @@ import SearchList from "./Search_List/SearchList";
 import "./Card.css";
 import Listicon from "../Assets/list-cIcY5BTW.png";
 import Backicon from "../Assets/back-svgrepo-com.svg";
+import CloseIcon from "../Assets/close-circle-svgrepo-com.svg"; // Import the close icon
 import Polygoncard from './Polygon_Card/PolygonCard';
 import Categorycard from "./Category_Card/Categorycard";
 
@@ -40,9 +41,14 @@ const Card = () => {
   };
 
   const handleCategoryClick = (category: string) => {
-    setSearchTerm(category);
-    navigate("/search");
-    setShowSearchList(true);
+    setSearchTerm(category); // Update the search term with the clicked category
+    navigate("/search"); // Navigate to the search route
+    setShowSearchList(true); // Show the search list
+  };
+
+  const handleCloseIconClick = () => {
+    setSearchTerm(""); // Clear the search term
+    navigate("/"); // Navigate back to the default route
   };
 
   return (
@@ -56,26 +62,36 @@ const Card = () => {
           onClick={handleBackIconClick}
         />
         <input
-          type="type"
+          type="text"
           id="locationsearch"
           placeholder="Search the office..."
           value={searchTerm}
           onChange={handleSearchInputChange}
           onClick={handleSearchInputClick}
         />
-        <img
-          id="toggle_list"
-          src={Listicon}
-          width="25"
-          alt="Toggle List"
-          onClick={handleListIconClick}
-        />
+        {searchTerm ? (
+          <img
+            id="close_icon"
+            src={CloseIcon}
+            width="25"
+            alt="Close"
+            onClick={handleCloseIconClick}
+          />
+        ) : (
+          <img
+            id="toggle_list"
+            src={Listicon}
+            width="25"
+            alt="Toggle List"
+            onClick={handleListIconClick}
+          />
+        )}
       </div>
 
       <Routes>
         <Route path="/" element={<TopLocationsCard />} />
         <Route path="/polygon/:id" element={<Polygoncard />} />
-        <Route path="/categorycard" element={<Categorycard onCategoryClick={handleCategoryClick} />} /> 
+        <Route path="/categorycard" element={<Categorycard onCategoryClick={handleCategoryClick} />} />
         <Route path="/search" element={<SearchList searchTerm={searchTerm} />} />
         {/* Add other routes as needed */}
       </Routes>

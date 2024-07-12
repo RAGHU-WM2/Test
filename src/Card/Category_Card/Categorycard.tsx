@@ -6,33 +6,37 @@ import deskIcon from "../../Assets/laptop.png";
 import meetingRoomIcon from "../../Assets/chair.png";
 import openSpacesIcon from "../../Assets/sofa.png";
 import washroomsIcon from "../../Assets/female-and-male-shapes-silhouettes.png";
-import './Category.css';
+import './Category.css'
 import useVenue from "../../Sources/useVenue";
-import { TGetVenueOptions } from "@mappedin/mappedin-js";
+import {
+    TGetVenueOptions,
+    E_SDK_EVENT,
+    E_CAMERA_EVENT,
+  } from "@mappedin/mappedin-js";
 
-interface CategoryCardProps {
-  onCategoryClick: (category: string) => void;
+interface Props {
+    onCategoryClick: (category: string) => void; // Define prop type for onCategoryClick function
 }
 
-const Categorycard: React.FC<CategoryCardProps> = ({ onCategoryClick }) => {
-  const options = useMemo<TGetVenueOptions>(
-    () => ({
-      venue: "mappedin-demo-office",
-      clientId: "5eab30aa91b055001a68e996",
-      clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
-    }),
-    []
-  );
+const Categorycard: React.FC<Props> = ({ onCategoryClick }) => {
+    const options = useMemo<TGetVenueOptions>(
+        () => ({
+          venue: "mappedin-demo-office",
+          clientId: "5eab30aa91b055001a68e996",
+          clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
+        }),
+        []
+      );
+    
+      const venue = useVenue(options);
 
-  const venue = useVenue(options);
+    venue?.categories.forEach((category) => {
+        console.log(category.name);
+    });
 
-  venue?.categories.forEach((category) => {
-    console.log(category.name);
-  });
-
-  const handleCategoryClick = (category: string) => {
-    onCategoryClick(category);
-  };
+    const handleCategoryClick = (category: string) => {
+        onCategoryClick(category); // Call parent component's onCategoryClick function
+    };
 
   return (
     <div>
@@ -40,7 +44,7 @@ const Categorycard: React.FC<CategoryCardProps> = ({ onCategoryClick }) => {
         <div className="amenities_container">
           <div className="amenities_top">
             <h4>Amenities</h4>
-            <h6 style={{ fontSize: "12px", cursor: "pointer" }}>See All</h6>
+            <h6 style={{ fontSize: "12px",cursor:"pointer" }}>See All</h6>
           </div>
           <div className="amenities_bottom">
             <button>
@@ -62,7 +66,7 @@ const Categorycard: React.FC<CategoryCardProps> = ({ onCategoryClick }) => {
                 Washroom
               </h6>
             </button>
-            <button>
+            <button onClick={() => handleCategoryClick("Desk")}>
               <img src={deskIcon} width="45" alt="01-D-001" />
               <h6>01-D-001</h6>
             </button>
@@ -84,7 +88,7 @@ const Categorycard: React.FC<CategoryCardProps> = ({ onCategoryClick }) => {
                 <img src={openSpacesIcon} alt="Open Spaces" width="25" />
                 Open Spaces
               </li>
-              <li style={{ border: "none" }} onClick={() => handleCategoryClick("Washrooms")}>
+              <li onClick={() => handleCategoryClick("Washrooms")}>
                 <img src={washroomsIcon} alt="Washrooms" width="25" />
                 Washrooms
               </li>

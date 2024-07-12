@@ -106,6 +106,10 @@
 }
 
 
-
+#close_icon{
+  position: absolute;
+  right: 1cm;
+  top: 0.8cm;
+}
 
 
