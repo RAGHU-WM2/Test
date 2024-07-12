@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+#Directioncard {
+  height: max-content;
+  width: 9.4cm;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  z-index: 999;
+  top: 2cm;
+  left: 14cm;
+  line-height: 60px;
+  border-radius: 23px;
+  font-family: "Figtree";
+}
+.directions_input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#Deparatureinput {
+  width: 76%;
+  border: none;
+  outline: none;
+  padding: 14px 0cm;
+  cursor: pointer;
+font-size: 18px;
+  border-radius: 8px;
+  background-color: rgb(237, 237, 237);
+}
+.directions_header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  margin-left: 5px;
+  font-weight: 100 !important;
+  font-family: "Figtree";
+}
+.directions_header > img {
+  position: relative;
+  left: 9px;
+}
+#Deparatureinput::placeholder {
+  font-size: 17px;
+  text-align: center;
+}
+
+#Arrivalinput {
+    width: 76%;
+    border: none;
+    outline: none;
+    padding: 14px 0cm;
+    cursor: pointer;
+  font-size: 18px;
+    border-radius: 8px;
+    background-color: rgb(237, 237, 237);
+}
+
+#Arrivalinput::placeholder {
+  font-size: 17px;
+  text-align: center;
+}
+
+.dirction_icons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+#doticon {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+#threedoticon {
+  margin-left: 16px;
+  margin-top: -12px;
+}
+#mapicon {
+  margin-left: 19px;
+  margin-top: 3px;
+}
+
+.Input_Change {
+  position: absolute;
+  right: 10px;
+  margin-top: 0.7cm;
+  cursor: pointer;
+}
+.steps_container{
+    height: 4.5cm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 1.2cm;
+}
+.steps_container_header{
+    font-size: 11px;
+}
+
+.steps_container_center{
+    display: flex;
+    gap: 42px;
+}
+.steps_container_center_left{
+display: grid;
+line-height: 20px;
+position: relative;
+font-size: 11px;
+}
+.steps_container_center_right{
+}
+
+#Steps_button{
+    background-color: #2266FF;
+    border: none;
+    outline: none;
+    font-family: Poppins;
+    width:3.2cm;
+    height: 1.1cm;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+}
+.Addicondiv{
+    position: absolute;
+left: -32px;
+top: 3px;
+}

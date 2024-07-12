@@ -6,7 +6,7 @@ import SearchList from "./Search_List/SearchList";
 import "./Card.css";
 import Listicon from "../Assets/list-cIcY5BTW.png";
 import Backicon from "../Assets/back-svgrepo-com.svg";
-import CloseIcon from "../Assets/close-circle-svgrepo-com.svg"; // Import the close icon
+import CloseIcon from "../Assets/close-svgrepo-com (1).svg"; // Import the close icon
 import Polygoncard from './Polygon_Card/PolygonCard';
 import Categorycard from "./Category_Card/Categorycard";
 
@@ -73,7 +73,7 @@ const Card = () => {
           <img
             id="close_icon"
             src={CloseIcon}
-            width="25"
+            width="21"
             alt="Close"
             onClick={handleCloseIconClick}
           />

@@ -23,16 +23,13 @@
   top: 0.8cm;
   cursor: pointer;
 }
-#locationsearch {
-  display: flex;
-  justify-content: center;
-}
 
 #search_input_container {
   display: flex;
   justify-content: center;
   position: fixed !important;
   top: 1px;
+  align-items: center;
 }
 
 #toggle_list {
@@ -43,25 +40,30 @@
 }
 
 #locationsearch {
-  width: 80%;
-  max-width: 30rem;
+  width: 40%;
+  font-weight: 700;
   font-family: "Lato";
+  color: grey;
   margin: 0 auto;
   border: none;
   outline: none;
   background-color: rgb(230, 230, 230);
   border-radius: 45px;
-  padding: 15px 14px;
+  padding: 15px 5cm;
   margin-top: 15px;
-  font-size: 19px;
-  text-align: center;
-
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center; /* Use lower case 'start' for text alignment */
+  padding-left: 20px; /* Add left padding to create left margin for text */
 }
+
 #locationsearch::placeholder {
   color: rgb(162, 162, 162) !important;
   font-size: 17px;
   text-align: center; /* Adjust as needed */
-  margin-right: 80px;
+  margin-right: -80px;
 }
 
 #locationsearch:placeholder-shown {
@@ -105,11 +107,8 @@
   align-items: start;
 }
 
-
-#close_icon{
+#close_icon {
   position: absolute;
   right: 1cm;
   top: 0.8cm;
 }
-
-

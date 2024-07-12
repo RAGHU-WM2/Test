@@ -10,7 +10,7 @@ import useVenue from "./Sources/useVenue";
 import './App.css'
 import Card from './Card/Card'
 import PolygonCard from "./Card/Polygon_Card/PolygonCard";
-
+import Direction_Card from "./Card/Direction_Card/Direction_Card";
 
 export default function App() {
   const options = useMemo<TGetVenueOptions>(
@@ -178,6 +178,7 @@ console.log("TOPLOCATIONS",venue?.venue.topLocations);
       </div>
       <Card/>
       <PolygonCard/>
+      <Direction_Card/>
     </div>
   );
   

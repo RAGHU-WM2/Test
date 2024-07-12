@@ -89,14 +89,14 @@ const SearchList: React.FC<Props> = ({ searchTerm }) => {
       <div id="directory">
         {filteredCategories.map((category) => (
           <div className="categoryGroup" key={category.id}>
-            {searchTerm && <h4 >{category.name}</h4>}
+            {searchTerm && <h4 style={{fontWeight:"500"}} >{category.name}</h4>}
             {category.locations && category.locations.length > 0 && (
               <div>
                 {category.locations.map((location: any) => ( // Adjust type as per your data structure
                   <div className="locationGroup" key={location.id}>
                     <div className="locationHeader">
                       <img src={Fireicon} alt="fire icon" width={17}  />
-                      <h4>{location.name}</h4>
+                      <h4 >{location.name}</h4>
                     </div>
                     {location.polygons && (
                       <ul className="polygonList">
