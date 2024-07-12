@@ -24,10 +24,9 @@ const Card = () => {
     setIsCategoryView(!isCategoryView);
   };
 
-const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setSearchTerm(event.target.value);
-};
-
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleSearchInputClick = () => {
     navigate("/search");
@@ -38,6 +37,12 @@ const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => 
     navigate("/");
     setShowSearchList(false);
     setSearchTerm(""); // Clear search term when navigating back
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setSearchTerm(category);
+    navigate("/search");
+    setShowSearchList(true);
   };
 
   return (
@@ -51,7 +56,7 @@ const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => 
           onClick={handleBackIconClick}
         />
         <input
-          type="text"
+          type="type"
           id="locationsearch"
           placeholder="Search the office..."
           value={searchTerm}
@@ -70,7 +75,7 @@ const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => 
       <Routes>
         <Route path="/" element={<TopLocationsCard />} />
         <Route path="/polygon/:id" element={<Polygoncard />} />
-        <Route path="/categorycard" element={<Categorycard />} /> 
+        <Route path="/categorycard" element={<Categorycard onCategoryClick={handleCategoryClick} />} /> 
         <Route path="/search" element={<SearchList searchTerm={searchTerm} />} />
         {/* Add other routes as needed */}
       </Routes>

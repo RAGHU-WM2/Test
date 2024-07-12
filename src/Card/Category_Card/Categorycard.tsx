@@ -6,37 +6,41 @@ import deskIcon from "../../Assets/laptop.png";
 import meetingRoomIcon from "../../Assets/chair.png";
 import openSpacesIcon from "../../Assets/sofa.png";
 import washroomsIcon from "../../Assets/female-and-male-shapes-silhouettes.png";
-import './Category.css'
+import './Category.css';
 import useVenue from "../../Sources/useVenue";
-import {
-    TGetVenueOptions,
-    E_SDK_EVENT,
-    E_CAMERA_EVENT,
-  } from "@mappedin/mappedin-js";
-const Categorycard = () => {
+import { TGetVenueOptions } from "@mappedin/mappedin-js";
 
+interface CategoryCardProps {
+  onCategoryClick: (category: string) => void;
+}
 
-    const options = useMemo<TGetVenueOptions>(
-        () => ({
-          venue: "mappedin-demo-office",
-          clientId: "5eab30aa91b055001a68e996",
-          clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
-        }),
-        []
-      );
-    
-      const venue = useVenue(options);
+const Categorycard: React.FC<CategoryCardProps> = ({ onCategoryClick }) => {
+  const options = useMemo<TGetVenueOptions>(
+    () => ({
+      venue: "mappedin-demo-office",
+      clientId: "5eab30aa91b055001a68e996",
+      clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
+    }),
+    []
+  );
 
-    venue?.categories.forEach((category) => {
-        console.log(category.name);
-    });
+  const venue = useVenue(options);
+
+  venue?.categories.forEach((category) => {
+    console.log(category.name);
+  });
+
+  const handleCategoryClick = (category: string) => {
+    onCategoryClick(category);
+  };
+
   return (
     <div>
       <div id="Category_container">
         <div className="amenities_container">
           <div className="amenities_top">
             <h4>Amenities</h4>
-            <h6 style={{ fontSize: "12px",cursor:"pointer" }}>See All</h6>
+            <h6 style={{ fontSize: "12px", cursor: "pointer" }}>See All</h6>
           </div>
           <div className="amenities_bottom">
             <button>
@@ -68,19 +72,19 @@ const Categorycard = () => {
           <h4>Categories</h4>
           <div className="categories_list">
             <ul>
-              <li >
+              <li onClick={() => handleCategoryClick("Desk")}>
                 <img src={deskIcon} width="25" alt="Desk" />
                 Desk
               </li>
-              <li>
+              <li onClick={() => handleCategoryClick("Meeting Room")}>
                 <img src={meetingRoomIcon} alt="Meeting Room" width="25" />
                 Meeting Room
               </li>
-              <li>
+              <li onClick={() => handleCategoryClick("Open Spaces")}>
                 <img src={openSpacesIcon} alt="Open Spaces" width="25" />
                 Open Spaces
               </li>
-              <li style={{ border: "none" }}>
+              <li style={{ border: "none" }} onClick={() => handleCategoryClick("Washrooms")}>
                 <img src={washroomsIcon} alt="Washrooms" width="25" />
                 Washrooms
               </li>
