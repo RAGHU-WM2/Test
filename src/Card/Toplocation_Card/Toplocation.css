@@ -1,0 +1,25 @@
+#Top_location_container {
+  width: 100%;
+  margin-top: 10px;
+  height: 19vh;
+}
+.Tlocation_top > h4 {
+  position: relative;
+  left: 0.8cm;
+  font-weight: 600;
+}
+.Tlocation_bottom {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+.Tlocation_bottom > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 11px;
+  font-weight:600;
+  color: grey;
+}
