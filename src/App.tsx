@@ -246,7 +246,14 @@ export default function App() {
             />
 
             <Route path="/Polygon" element={<PolygonCard />} />
-            <Route path="/directions" element={<DirectionCard />} />
+            <Route
+              path="/directions/true"
+              element={
+                <>
+                  <DirectionCard />
+                </>
+              }
+            />
           </Routes>
         </div>
       </Router>

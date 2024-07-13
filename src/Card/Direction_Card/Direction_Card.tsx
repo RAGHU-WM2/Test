@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Direction.css";
 import Threedot from "../../Assets/three-dots-svgrepo-com.svg";
 import Dot from "../../Assets/dot-svgrepo-com (1).svg";
@@ -9,13 +9,25 @@ import Rightarrowicon from "../../Assets/right-arrow-svgrepo-com (3).svg";
 import Addicon from "../../Assets/add-button-svgrepo-com.svg";
 import Backarrowicon_direction from "../../Assets/back-svgrepo-com.svg";
 
+interface LocationState {
+  locationName: string;
+}
+
 const DirectionCard = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const locationState = location.state as LocationState;
+  const locationName = locationState?.locationName || "Unknown Location";
 
   return (
     <div id="Directioncard">
       <div className="directions_header">
-        <img src={Backarrowicon_direction} alt="Back" width={21} onClick={() => navigate(-1)} />
+        <img
+          src={Backarrowicon_direction}
+          alt="Back"
+          width={21}
+          onClick={() => navigate(-1)}
+        />
         <h2 style={{ fontFamily: "Figtree" }}>Directions</h2>
       </div>
 
@@ -34,15 +46,16 @@ const DirectionCard = () => {
           type="search"
           name=""
           id="Deparatureinput"
-          placeholder=" Choose Deparature"
+          placeholder="Choose Departure"
           style={{ fontFamily: "Figtree" }}
         />
         <input
           type="search"
           name=""
           id="Arrivalinput"
-          placeholder=" Choose Arrival"
+          placeholder="Choose Arrival"
           style={{ fontFamily: "Figtree" }}
+          value={locationName} // Set the value of the input to locationName
         />
       </div>
 

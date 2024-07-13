@@ -9,6 +9,7 @@ import { getVenue, TGetVenueOptions } from "@mappedin/mappedin-js";
 import "@mappedin/mappedin-js/lib/mappedin.css";
 import "./Search.css";
 import { Link } from "react-router-dom";
+import Categorycard from "../Category_Card/Categorycard";
 
 const options: TGetVenueOptions = {
   venue: "mappedin-demo-office",
@@ -88,7 +89,7 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
               <Link
                 key={index}
                 to={`/Polygon`}
-                state={{ locationName: info.name }}
+                state={{ locationName: info.name,floorName:info.polygonName,CategoryName:info.categoryName,typeName:info.locationType }}
                 style={{
                   listStyle: 'none',
                   textDecoration: "none",
