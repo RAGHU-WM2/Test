@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Direction.css";
 import Threedot from "../../Assets/three-dots-svgrepo-com.svg";
 import Dot from "../../Assets/dot-svgrepo-com (1).svg";
@@ -7,14 +7,15 @@ import Mapicon from "../../Assets/pin.png";
 import Inputchnageicon from "../../Assets/up-down-arrow-svgrepo-com (1).svg";
 import Rightarrowicon from "../../Assets/right-arrow-svgrepo-com (3).svg";
 import Addicon from "../../Assets/add-button-svgrepo-com.svg";
-
 import Backarrowicon_direction from "../../Assets/back-svgrepo-com.svg";
+
 const DirectionCard = () => {
+  const navigate = useNavigate();
+
   return (
     <div id="Directioncard">
       <div className="directions_header">
-        <img src={Backarrowicon_direction} alt="" width={21} />
-
+        <img src={Backarrowicon_direction} alt="Back" width={21} onClick={() => navigate(-1)} />
         <h2 style={{ fontFamily: "Figtree" }}>Directions</h2>
       </div>
 
@@ -44,8 +45,7 @@ const DirectionCard = () => {
           style={{ fontFamily: "Figtree" }}
         />
       </div>
-      {/* <Link to="/directioncard/edit">Home</Link> */}
-    
+
       <div className="steps_container">
         <div className="steps_container_header">
           <p>Add Destination</p>
@@ -63,7 +63,6 @@ const DirectionCard = () => {
           </div>
           <div className="steps_container_center_right">
             <button id="Steps_button">
-              {" "}
               Steps <img src={Rightarrowicon} width={20} alt="" />
             </button>
           </div>

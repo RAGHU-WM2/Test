@@ -10,7 +10,8 @@ import useVenue from "./Sources/useVenue";
 import './App.css'
 import Card from './Card/Card'
 import PolygonCard from "./Card/Polygon_Card/PolygonCard";
-import Direction_Card from "./Card/Direction_Card/Direction_Card";
+import DirectionCard from "./Card/Direction_Card/Direction_Card";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
   const options = useMemo<TGetVenueOptions>(
@@ -27,6 +28,8 @@ export default function App() {
 
   const { elementRef, mapView } = useMapView(venue);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [showCard, setShowCard] = useState(true); // State to manage Card visibility
+
   console.log("TOPLOCATIONS", venue?.venue.topLocations);
 
   // State for map groups and levels
@@ -50,8 +53,9 @@ export default function App() {
           );
           if (parentObject) {
             setSelectedLocation(parentObject);
+            setShowCard(false); // Hide Card component
             console.log("Floor name:", polygons[0].map.name); 
-            console.log("Room Name:", parentObject.name); 
+            console.log("Room Name:", parentObject.name); // Log location details here
             console.log("Type :", parentObject.type); 
 
             parentObject.categories.forEach((category: any) => {
@@ -183,8 +187,14 @@ export default function App() {
           ))}
         </select>
       </div>
-      <Card />
-      <PolygonCard />
+      {showCard && <Card />} {/* Conditionally render the Card component */}
+
+      <Router>
+        <Routes>
+        {!showCard && <Route path="/" element={<PolygonCard />} />}
+          <Route path="/directions" element={<DirectionCard />} />
+        </Routes>
+      </Router>
       {/* <Direction_Card/> */}
     </div>
   );
