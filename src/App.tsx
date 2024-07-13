@@ -7,12 +7,15 @@ import {
 import "@mappedin/mappedin-js/lib/mappedin.css";
 import useMapView from "./Sources/useMapview";
 import useVenue from "./Sources/useVenue";
-import './App.css'
-import Card from './Card/Card'
+import "./App.css";
+import Card from "./Card/Card";
 import PolygonCard from "./Card/Polygon_Card/PolygonCard";
 import DirectionCard from "./Card/Direction_Card/Direction_Card";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Toplocation_card from "./Card/Toplocation_Card/ToplocationCard";
+import Categorycard from "./Card/Category_Card/Categorycard";
+import Empty from "./Card/Empty";
+import SearchList from "./Card/Search_List/SearchList";
 export default function App() {
   const options = useMemo<TGetVenueOptions>(
     () => ({
@@ -29,6 +32,7 @@ export default function App() {
   const { elementRef, mapView } = useMapView(venue);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [showCard, setShowCard] = useState(true); // State to manage Card visibility
+  const [searchTerm, setSearchTerm] = useState("");
 
   console.log("TOPLOCATIONS", venue?.venue.topLocations);
 
@@ -54,12 +58,12 @@ export default function App() {
           if (parentObject) {
             setSelectedLocation(parentObject);
             setShowCard(false); // Hide Card component
-            console.log("Floor name:", polygons[0].map.name); 
+            console.log("Floor name:", polygons[0].map.name);
             console.log("Room Name:", parentObject.name); // Log location details here
-            console.log("Type :", parentObject.type); 
+            console.log("Type :", parentObject.type);
 
             parentObject.categories.forEach((category: any) => {
-              console.log("Category Name:", category.name); 
+              console.log("Category Name:", category.name);
             });
           }
         } else {
@@ -143,7 +147,9 @@ export default function App() {
       // Populate map groups and levels
       setMapGroups(venue.mapGroups);
 
-      const initialMaps = venue.mapGroups[0].maps.sort((a, b) => b.elevation - a.elevation);
+      const initialMaps = venue.mapGroups[0].maps.sort(
+        (a, b) => b.elevation - a.elevation
+      );
       setMaps(initialMaps);
     }
   }, [mapView, venue]);
@@ -151,9 +157,13 @@ export default function App() {
   const handleMapGroupChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       if (venue) {
-        const mapGroup = venue.mapGroups.find((mg) => mg.id === event.target.value);
+        const mapGroup = venue.mapGroups.find(
+          (mg) => mg.id === event.target.value
+        );
         if (mapGroup) {
-          const sortedMaps = mapGroup.maps.sort((a, b) => b.elevation - a.elevation);
+          const sortedMaps = mapGroup.maps.sort(
+            (a, b) => b.elevation - a.elevation
+          );
           setMaps(sortedMaps);
           if (mapView) {
             mapView.setMap(sortedMaps[sortedMaps.length - 1]);
@@ -173,27 +183,66 @@ export default function App() {
     [mapView]
   );
 
+
+  
   return (
     <div id="app" ref={elementRef}>
       <div id="selectorDiv">
         <select onChange={handleMapGroupChange} style={{ display: "none" }}>
           {mapGroups.map((mg) => (
-            <option key={mg.id} value={mg.id}>{mg.name}</option>
+            <option key={mg.id} value={mg.id}>
+              {mg.name}
+            </option>
           ))}
         </select>
         <select onChange={handleMapLevelChange} id="Levelselctor">
           {maps.map((map) => (
-            <option key={map.id} value={map.id}>{map.name}</option>
+            <option key={map.id} value={map.id}>
+              {map.name}
+            </option>
           ))}
         </select>
       </div>
-      {showCard && <Card />} {/* Conditionally render the Card component */}
 
       <Router>
-        <Routes>
-        {!showCard && <Route path="/" element={<PolygonCard />} />}
-          <Route path="/directions" element={<DirectionCard />} />
-        </Routes>
+        {/* <Empty/> */}
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 999,
+            height: "max-content",
+            left: "3cm",
+            top: "1cm",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            transition:" 3s height ease"
+          }}
+        >
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Card setSearchTerm={setSearchTerm} />
+                  <Toplocation_card />
+                </>
+              }
+            />
+            <Route path="/Categories" element={<Categorycard />} />
+            <Route
+              path="/searchlist"
+              element={
+                <>
+                  <Card setSearchTerm={setSearchTerm} />
+                  <SearchList searchTerm={searchTerm} />
+                </>
+              }
+            />
+
+            <Route path="/Polygon" element={<PolygonCard />} />
+            <Route path="/directions" element={<DirectionCard />} />
+          </Routes>
+        </div>
       </Router>
       {/* <Direction_Card/> */}
     </div>

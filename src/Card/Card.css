@@ -3,10 +3,9 @@
 #Card {
   z-index: 999;
   border-radius: 16px;
-  height: max-content;
+  /* height:max-content; */
   width: 10cm;
-  background-color: rgb(255, 255, 255);
-  position: absolute;
+  /* position: absolute; */
   left: 2cm;
   top: 2cm;
   overflow-y: auto;
@@ -109,6 +108,8 @@
 
 #close_icon {
   position: absolute;
-  right: 1cm;
-  top: 0.8cm;
+  /* right: 1cm;
+  top: 2cm; */
+  margin-top: 10px;
+  margin-right: 10px;
 }

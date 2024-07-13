@@ -1,61 +1,70 @@
-.search_top_header{
-    display: flex;
-    align-items: center;
-    gap: 5.5cm;
-    margin-top: 0.5cm;
-  }
-  
-  .searchlist {
-    width: 89%;
-    margin: 0 auto;
-    height: 12cm;     
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
-    overflow-y: auto;
-    scroll-behavior: smooth;
-  }
-  
-  .searchlist::-webkit-scrollbar {
-    display: none; 
-  }
-  
-  .locationGroup {
-    width: 90%;
-    border-bottom: 1px solid #eeeeee;
-    font-family: "Lato";
-    margin-top: 10px;
-  }
-  
-  .locationGroup:hover {
-    background-color: #F2F2F2;
-    border-radius: 9px;
-    width: 100%;
-    height: auto;
-  }
-  
-  .locationHeader {
-    display: flex;
-    align-items: center;
-  }
-  
-  .locationHeader h4 {
-    font-size: 16px;
-    margin: 0;
-    margin-left: 10px;
-    font-weight: 500;
-  }
-  
-  .polygonList {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-  }
-  
-  .polygonList li {
-    font-size: 12px;
-    color: grey;
-    font-weight: 400;
+.search_top_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5cm;
+  margin-top: 0.5cm;
+  padding: 0cm 8px;
+}
 
-    padding-left: 24px; /* Adjust padding to align with the header */
-  }
-  
+.searchlist {
+  width: 89%;
+  margin: 0 auto;
+  height: 12cm;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.searchlist::-webkit-scrollbar {
+  display: none;
+}
+
+.locationGroup {
+  width: 90%;
+  border-bottom: 1px solid #eeeeee;
+  font-family: "Lato";
+  margin-top: 10px;
+}
+
+.locationGroup:hover {
+  background-color: #f2f2f2;
+  border-radius: 9px;
+  width: 100%;
+  height: auto;
+}
+
+.locationHeader {
+  display: flex;
+  align-items: center;
+}
+
+.locationHeader h4 {
+  font-size: 16px;
+  margin: 0;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.categoryGroup > span {
+  margin-top: 10px;
+}
+#directory {
+  position: relative;
+  /* left: 1cm; */
+  padding: 0 20px;
+
+}
+.categoryGroup > ul > li {
+  list-style: none;
+}
+.categoryGroup {
+  display: flex;
+gap: 10px;
+  border-bottom: 1px solid #ebebeb; /* Adjust the color and thickness as needed */
+  padding: 10px 0; /* Optional: add some padding */
+}
+.categoryGroup:last-child {
+  border-bottom: none; /* Removes border for the last item */
+} 

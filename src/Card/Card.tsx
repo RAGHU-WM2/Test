@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import TopLocationsCard from "./Toplocation_Card/ToplocationCard";
-import SearchList from "./Search_List/SearchList";
-
+import { useNavigate } from "react-router-dom";
 import "./Card.css";
 import Listicon from "../Assets/list-cIcY5BTW.png";
 import Backicon from "../Assets/back-svgrepo-com.svg";
-import CloseIcon from "../Assets/close-svgrepo-com (1).svg"; // Import the close icon
-import Polygoncard from './Polygon_Card/PolygonCard';
-import Categorycard from "./Category_Card/Categorycard";
+import CloseIcon from "../Assets/close-svgrepo-com (1).svg";
 
-const Card = () => {
+interface CardProps {
+  setSearchTerm: (term: string) => void;
+}
+
+const Card: React.FC<CardProps> = ({ setSearchTerm }) => {
   const navigate = useNavigate();
   const [isCategoryView, setIsCategoryView] = useState(false);
   const [showSearchList, setShowSearchList] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleListIconClick = () => {
     if (isCategoryView) {
@@ -25,32 +24,28 @@ const Card = () => {
     setIsCategoryView(!isCategoryView);
   };
 
-  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchInputClick = () => {
-    navigate("/search");
-    setShowSearchList(true);
-  };
-
   const handleBackIconClick = () => {
     navigate("/");
     setShowSearchList(false);
     setSearchTerm(""); // Clear search term when navigating back
+    setInputValue(""); // Clear the input value
   };
 
-  const handleCategoryClick = (category: string) => {
-    setSearchTerm(category); // Update the search term with the clicked category
-    navigate("/search"); // Navigate to the search route
-    setShowSearchList(true); // Show the search list
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputValue(value); // Update local input state
+    setSearchTerm(value); // Update the search term in App component
   };
 
   const handleCloseIconClick = () => {
     setSearchTerm(""); // Clear the search term
+    setInputValue(""); // Clear the input value
     navigate("/"); // Navigate back to the default route
   };
-
+  const handleSearchInputClick = () => {
+    navigate("/searchlist");
+    setShowSearchList(true);
+  };
   return (
     <div id="Card">
       <div className="search_input_container">
@@ -65,11 +60,12 @@ const Card = () => {
           type="text"
           id="locationsearch"
           placeholder="Search the office..."
-          value={searchTerm}
+          value={inputValue} // Use local state for input
           onChange={handleSearchInputChange}
           onClick={handleSearchInputClick}
+
         />
-        {searchTerm ? (
+        {inputValue ? ( // Check local input state instead of searchTerm
           <img
             id="close_icon"
             src={CloseIcon}
@@ -87,24 +83,8 @@ const Card = () => {
           />
         )}
       </div>
-
-      <Routes>
-        <Route path="/" element={<TopLocationsCard />} />
-        <Route path="/polygon/:id" element={<Polygoncard />} />
-        <Route path="/categorycard" element={<Categorycard onCategoryClick={handleCategoryClick} />} />
-        <Route path="/search" element={<SearchList searchTerm={searchTerm} />} />
-        {/* Add other routes as needed */}
-      </Routes>
     </div>
   );
 };
 
-const App = () => {
-  return (
-    <Router>
-      <Card />
-    </Router>
-  );
-};
-
-export default App;
+export default Card;

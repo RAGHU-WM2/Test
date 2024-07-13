@@ -24,7 +24,7 @@ import {
   
         const mergedOptions = {
           ...options,
-          backgroundColor: "#E7E1DA"
+          backgroundColor: "#E0D9CE"
         };
   
         const _mapView = await showVenue(el, venue, mergedOptions);
