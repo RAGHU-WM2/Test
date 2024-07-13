@@ -4,7 +4,9 @@ import Toilet from "../../Assets/toilet_16750317.png";
 import Closeicon from "../../Assets/close-circle-svgrepo-com.svg";
 // import Fullscreenicon from "../../Assets/fullscreen-r8if0idY-r8if0idY.png";
 
-const Polygon_card = () => {
+const PolygonCard = () => {
+
+
   return (
     <div id="polygoncard">
       <div className="location_details">
@@ -28,4 +30,4 @@ const Polygon_card = () => {
   );
 };
 
-export default Polygon_card;
+export default PolygonCard;

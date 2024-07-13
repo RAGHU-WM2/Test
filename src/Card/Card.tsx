@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import TopLocationsCard from "./Toplocation_Card/ToplocationCard";
 import SearchList from "./Search_List/SearchList";
 
@@ -7,8 +13,9 @@ import "./Card.css";
 import Listicon from "../Assets/list-cIcY5BTW.png";
 import Backicon from "../Assets/back-svgrepo-com.svg";
 import CloseIcon from "../Assets/close-svgrepo-com (1).svg"; // Import the close icon
-import Polygoncard from './Polygon_Card/PolygonCard';
+import Polygoncard from "./Polygon_Card/PolygonCard";
 import Categorycard from "./Category_Card/Categorycard";
+import DirectionCard from "./Direction_Card/Direction_Card";
 
 const Card = () => {
   const navigate = useNavigate();
@@ -25,7 +32,9 @@ const Card = () => {
     setIsCategoryView(!isCategoryView);
   };
 
-  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSearchTerm(event.target.value);
   };
 
@@ -56,7 +65,7 @@ const Card = () => {
       <div className="search_input_container">
         <img
           src={Backicon}
-          alt=""
+          alt="Back"
           id="backicon"
           width={23}
           onClick={handleBackIconClick}
@@ -87,13 +96,15 @@ const Card = () => {
           />
         )}
       </div>
+      <Routes>     
 
-      <Routes>
         <Route path="/" element={<TopLocationsCard />} />
         <Route path="/polygon/:id" element={<Polygoncard />} />
-        <Route path="/categorycard" element={<Categorycard onCategoryClick={handleCategoryClick} />} />
+        <Route
+          path="/categorycard"
+          element={<Categorycard onCategoryClick={handleCategoryClick} />}
+        />
         <Route path="/search" element={<SearchList searchTerm={searchTerm} />} />
-        {/* Add other routes as needed */}
       </Routes>
     </div>
   );
@@ -102,6 +113,7 @@ const Card = () => {
 const App = () => {
   return (
     <Router>
+
       <Card />
     </Router>
   );

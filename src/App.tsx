@@ -23,11 +23,11 @@ export default function App() {
   );
 
   const venue = useVenue(options);
-  console.log("venue",venue);
-  
+  console.log("venue", venue);
+
   const { elementRef, mapView } = useMapView(venue);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
-console.log("TOPLOCATIONS",venue?.venue.topLocations);
+  console.log("TOPLOCATIONS", venue?.venue.topLocations);
 
   // State for map groups and levels
   const [mapGroups, setMapGroups] = useState<any[]>([]);
@@ -50,6 +50,13 @@ console.log("TOPLOCATIONS",venue?.venue.topLocations);
           );
           if (parentObject) {
             setSelectedLocation(parentObject);
+            console.log("Floor name:", polygons[0].map.name); 
+            console.log("Room Name:", parentObject.name); 
+            console.log("Type :", parentObject.type); 
+
+            parentObject.categories.forEach((category: any) => {
+              console.log("Category Name:", category.name); 
+            });
           }
         } else {
           setSelectedLocation(null);
@@ -165,7 +172,7 @@ console.log("TOPLOCATIONS",venue?.venue.topLocations);
   return (
     <div id="app" ref={elementRef}>
       <div id="selectorDiv">
-        <select onChange={handleMapGroupChange} style={{display:"none"}}>
+        <select onChange={handleMapGroupChange} style={{ display: "none" }}>
           {mapGroups.map((mg) => (
             <option key={mg.id} value={mg.id}>{mg.name}</option>
           ))}
@@ -176,11 +183,9 @@ console.log("TOPLOCATIONS",venue?.venue.topLocations);
           ))}
         </select>
       </div>
-      <Card/>
-      <PolygonCard/>
-      <Direction_Card/>
+      <Card />
+      <PolygonCard />
+      {/* <Direction_Card/> */}
     </div>
   );
-  
-  
 }

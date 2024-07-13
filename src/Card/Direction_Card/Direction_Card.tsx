@@ -44,7 +44,8 @@ const DirectionCard = () => {
           style={{ fontFamily: "Figtree" }}
         />
       </div>
-
+      {/* <Link to="/directioncard/edit">Home</Link> */}
+    
       <div className="steps_container">
         <div className="steps_container_header">
           <p>Add Destination</p>
