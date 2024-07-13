@@ -16,6 +16,7 @@ import Toplocation_card from "./Card/Toplocation_Card/ToplocationCard";
 import Categorycard from "./Card/Category_Card/Categorycard";
 import Empty from "./Card/Empty";
 import SearchList from "./Card/Search_List/SearchList";
+
 export default function App() {
   const options = useMemo<TGetVenueOptions>(
     () => ({
@@ -240,7 +241,7 @@ export default function App() {
               element={
                 <>
                   <Card setSearchTerm={setSearchTerm} />
-                  <SearchList searchTerm={searchTerm} />
+                  <SearchList searchTerm={searchTerm} mapView={mapView} venue={venue}/>
                 </>
               }
             />
@@ -252,22 +253,17 @@ export default function App() {
                 <div style={{position:"fixed"}}>
                   <DirectionCard />
                   <div style={{position:"fixed",left:"123px",  width:"9.4cm",top:"5.6cm",paddingTop:"0.3cm", backgroundColor:"white",borderRadius:"23px"}}>
-                  <SearchList searchTerm={searchTerm} />
+                  <SearchList searchTerm={searchTerm} mapView={mapView} venue={venue}/>
                   </div>
              
 
                 </div>
               }
             />
-
-
-
-
-            
           </Routes>
         </div>
       </Router>
-      {/* <Direction_Card/> */}
     </div>
   );
 }
+  

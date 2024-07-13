@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Fireicon from "../../Assets/fire.png";
 import DeskIcon from "../../Assets/laptop.png";
 import MeetingRoomIcon from "../../Assets/chair.png";
 import OpenSpacesIcon from "../../Assets/sofa.png";
 import WashroomsIcon from "../../Assets/female-and-male-shapes-silhouettes.png";
-
 import { getVenue, TGetVenueOptions } from "@mappedin/mappedin-js";
 import "@mappedin/mappedin-js/lib/mappedin.css";
 import "./Search.css";
-import { Link } from "react-router-dom";
-import Categorycard from "../Category_Card/Categorycard";
 
 const options: TGetVenueOptions = {
   venue: "mappedin-demo-office",
   clientId: "5eab30aa91b055001a68e996",
   clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
 };
+
+interface Location {
+  name: string;
+  polygons: { id: string; map: { name: string } }[];
+}
 
 interface LocationInfo {
   name: string;
@@ -26,15 +29,17 @@ interface LocationInfo {
 
 interface SearchListProps {
   searchTerm: string;
+  mapView: any; // Change to the appropriate type if possible
+  venue: any;   // Change to the appropriate type if possible
 }
 
-const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
+const SearchList: React.FC<SearchListProps> = ({ searchTerm, mapView, venue }) => {
   const [locationsInfo, setLocationsInfo] = useState<LocationInfo[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const venue = await getVenue(options);
-      const locationsData: LocationInfo[] = venue.locations.map((location) => {
+      const venueData = await getVenue(options);
+      const locationsData: LocationInfo[] = venueData.locations.map((location) => {
         const name = location.name ?? "Unknown Location";
         const polygonName =
           location.polygons?.[0]?.map?.name ?? "Unknown Polygon";
@@ -75,6 +80,16 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
     }
   };
 
+  const handleLocationClick = (info: LocationInfo) => {
+    // Highlight the polygon
+    mapView.clearAllPolygonColors(); // Clear previous highlights
+    const polygons = venue?.locations.find((loc: Location) => loc.name === info.name)?.polygons;
+    if (polygons?.length) {
+      mapView.setPolygonColor(polygons[0], "grey");
+      mapView.Camera.focusOn({ polygons }, { duration: 500 });
+    }
+  };
+
   return (
     <div>
       <div className="searchlist">
@@ -89,7 +104,8 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
               <Link
                 key={index}
                 to={`/Polygon`}
-                state={{ locationName: info.name,floorName:info.polygonName,CategoryName:info.categoryName,typeName:info.locationType }}
+                state={{ locationName: info.name, floorName: info.polygonName, CategoryName: info.categoryName, typeName: info.locationType }}
+                onClick={() => handleLocationClick(info)} // Handle click
                 style={{
                   listStyle: 'none',
                   textDecoration: "none",
