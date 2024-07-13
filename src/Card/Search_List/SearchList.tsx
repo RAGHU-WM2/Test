@@ -26,6 +26,7 @@ interface LocationInfo {
 interface SearchListProps {
   searchTerm: string;
 }
+
 const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
   const [locationsInfo, setLocationsInfo] = useState<LocationInfo[]>([]);
 
@@ -79,13 +80,22 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
         <div className="search_top_header">
           <h4 style={{ fontWeight: "500", fontSize: "16px" }}>Most Popular</h4>
           <img src={Fireicon} alt="fire icon" width={13} height={13} />
-        </div>{" "}
+        </div>
         <div id="directory">
-          <Link to="/Polygon" style={{listStyle:'none',textDecoration:"none",color:"Black"}}>
-            {filteredLocations.map((info, index) => {
-              const iconSrc = getIcon(info.categoryName);
-              return (
-                <div key={index} className="categoryGroup">
+          {filteredLocations.map((info, index) => {
+            const iconSrc = getIcon(info.categoryName);
+            return (
+              <Link
+                key={index}
+                to={`/Polygon`}
+                state={{ locationName: info.name }}
+                style={{
+                  listStyle: 'none',
+                  textDecoration: "none",
+                  color: "Black",
+                }}
+              >
+                <div className="categoryGroup">
                   <span>
                     {iconSrc && (
                       <img src={iconSrc} alt={info.categoryName} width={23} />
@@ -96,9 +106,9 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
                     <li style={{ fontSize: "11px" }}>{info.polygonName}</li>
                   </ul>
                 </div>
-              );
-            })}
-          </Link>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

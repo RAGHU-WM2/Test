@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Polygon.css";
 import Toilet from "../../Assets/toilet_16750317.png";
 import Closeicon from "../../Assets/close-circle-svgrepo-com.svg";
 import DirectionCard from "../Direction_Card/Direction_Card"; // Import the DirectionCard component
 
+interface LocationState {
+  locationName: string;
+}
+
 const PolygonCard = () => {
+  const location = useLocation();
+  const locationState = location.state as LocationState;
+  const locationName = locationState?.locationName || "Unknown Location";
   const [showDirections, setShowDirections] = useState(false); // State to manage visibility
 
   const handleDirectionsClick = () => {
@@ -16,7 +24,7 @@ const PolygonCard = () => {
       <div className="location_details">
         <div className="top_header_location">
           <img src={Toilet} width="40" id="icon_loader" alt="Icon Loader" />
-          <h2 style={{ fontFamily: "figtree", fontWeight: "600" }}>Men's Washroom</h2>
+          <h2 style={{ fontFamily: "figtree", fontWeight: "600" }}>{locationName}</h2>
           <img src={Closeicon} width="30" alt="Close" id="close_icon" />
         </div>
         <div className="middle_floor">
