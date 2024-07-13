@@ -6,7 +6,7 @@
 
 #polygoncard{
     position: absolute;
-    top: 2cm;
+    top: 8cm;
     left: 2cm;
     z-index: 999;
 }
