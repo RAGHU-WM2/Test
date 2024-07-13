@@ -3,7 +3,7 @@
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none; 
-
+width: 10cm;
 scroll-behavior: smooth;
 }
 

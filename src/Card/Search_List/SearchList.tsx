@@ -5,12 +5,10 @@ import MeetingRoomIcon from "../../Assets/chair.png";
 import OpenSpacesIcon from "../../Assets/sofa.png";
 import WashroomsIcon from "../../Assets/female-and-male-shapes-silhouettes.png";
 
-import {
-  getVenue,
-  TGetVenueOptions,
-} from "@mappedin/mappedin-js";
+import { getVenue, TGetVenueOptions } from "@mappedin/mappedin-js";
 import "@mappedin/mappedin-js/lib/mappedin.css";
 import "./Search.css";
+import { Link } from "react-router-dom";
 
 const options: TGetVenueOptions = {
   venue: "mappedin-demo-office",
@@ -36,9 +34,11 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
       const venue = await getVenue(options);
       const locationsData: LocationInfo[] = venue.locations.map((location) => {
         const name = location.name ?? "Unknown Location";
-        const polygonName = location.polygons?.[0]?.map?.name ?? "Unknown Polygon";
+        const polygonName =
+          location.polygons?.[0]?.map?.name ?? "Unknown Polygon";
         const locationType = location.type ?? "Unknown Type";
-        const categoryName = location.categories?.[0]?.name ?? "Unknown Category";
+        const categoryName =
+          location.categories?.[0]?.name ?? "Unknown Category";
 
         return {
           name,
@@ -54,7 +54,7 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
     fetchData();
   }, []);
 
-  const filteredLocations = locationsInfo.filter(info =>
+  const filteredLocations = locationsInfo.filter((info) =>
     info.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -79,22 +79,26 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm }) => {
         <div className="search_top_header">
           <h4 style={{ fontWeight: "500", fontSize: "16px" }}>Most Popular</h4>
           <img src={Fireicon} alt="fire icon" width={13} height={13} />
-        </div>
+        </div>{" "}
         <div id="directory">
-          {filteredLocations.map((info, index) => {
-            const iconSrc = getIcon(info.categoryName);
-            return (
-              <div key={index} className="categoryGroup">
-                <span>
-                  {iconSrc && <img src={iconSrc} alt={info.categoryName} width={23} />}
-                </span>
-                <ul>
-                  <li style={{ fontWeight: "500" }}>{info.name}</li>
-                  <li style={{ fontSize: "11px" }}>{info.polygonName}</li>
-                </ul>
-              </div>
-            );
-          })}
+          <Link to="/Polygon" style={{listStyle:'none',textDecoration:"none",color:"Black"}}>
+            {filteredLocations.map((info, index) => {
+              const iconSrc = getIcon(info.categoryName);
+              return (
+                <div key={index} className="categoryGroup">
+                  <span>
+                    {iconSrc && (
+                      <img src={iconSrc} alt={info.categoryName} width={23} />
+                    )}
+                  </span>
+                  <ul>
+                    <li style={{ fontWeight: "500" }}>{info.name}</li>
+                    <li style={{ fontSize: "11px" }}>{info.polygonName}</li>
+                  </ul>
+                </div>
+              );
+            })}
+          </Link>
         </div>
       </div>
     </div>

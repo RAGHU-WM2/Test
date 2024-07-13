@@ -183,8 +183,6 @@ export default function App() {
     [mapView]
   );
 
-
-  
   return (
     <div id="app" ref={elementRef}>
       <div id="selectorDiv">
@@ -215,7 +213,7 @@ export default function App() {
             top: "1cm",
             backgroundColor: "white",
             borderRadius: "20px",
-            transition:" 3s height ease"
+            transition: " 3s height ease",
           }}
         >
           <Routes>
@@ -228,7 +226,15 @@ export default function App() {
                 </>
               }
             />
-            <Route path="/Categories" element={<Categorycard />} />
+            <Route
+              path="/categorycard"
+              element={
+                <>
+                  <Card setSearchTerm={setSearchTerm} />
+                  <Categorycard />{" "}
+                </>
+              }
+            />
             <Route
               path="/searchlist"
               element={
