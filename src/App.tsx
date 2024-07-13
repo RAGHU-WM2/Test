@@ -249,11 +249,21 @@ export default function App() {
             <Route
               path="/directions/true"
               element={
-                <>
+                <div style={{position:"fixed"}}>
                   <DirectionCard />
-                </>
+                  <div style={{position:"fixed",left:"123px",  width:"9.4cm",top:"5.6cm",paddingTop:"0.3cm", backgroundColor:"white",borderRadius:"23px"}}>
+                  <SearchList searchTerm={searchTerm} />
+                  </div>
+             
+
+                </div>
               }
             />
+
+
+
+
+            
           </Routes>
         </div>
       </Router>

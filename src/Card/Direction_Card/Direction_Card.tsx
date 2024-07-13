@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Direction.css";
 import Threedot from "../../Assets/three-dots-svgrepo-com.svg";
 import Dot from "../../Assets/dot-svgrepo-com (1).svg";
@@ -42,24 +42,25 @@ const DirectionCard = () => {
       </div>
 
       <div className="directions_input">
-        <input
-          type="search"
-          name=""
-          id="Deparatureinput"
-          placeholder="Choose Departure"
-          style={{ fontFamily: "Figtree" }}
-        />
+          {" "}
+          <input
+            type="search"
+            name=""
+            id="Deparatureinput"
+            placeholder="Choose Departure"
+            style={{ fontFamily: "Figtree" }}
+          />
         <input
           type="search"
           name=""
           id="Arrivalinput"
           placeholder="Choose Arrival"
-          style={{ fontFamily: "Figtree" }}
+          style={{ fontFamily: "Figtree",marginBottom:"0.8cm" }}
           value={locationName} // Set the value of the input to locationName
         />
       </div>
 
-      <div className="steps_container">
+      <div className="steps_container" style={{ display: "none" }}>
         <div className="steps_container_header">
           <p>Add Destination</p>
         </div>

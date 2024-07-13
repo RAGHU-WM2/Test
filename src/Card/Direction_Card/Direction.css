@@ -3,7 +3,7 @@
 #Directioncard {
   height: max-content;
   width: 9.4cm;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   position: absolute;
   z-index: 999;
   top: 10px;
@@ -23,7 +23,7 @@
   width: 76%;
   border: none;
   outline: none;
-  padding: 14px 0cm;
+  padding: 14px 1cm;
   cursor: pointer;
 font-size: 18px;
   border-radius: 8px;
@@ -52,7 +52,7 @@ font-size: 18px;
     width: 76%;
     border: none;
     outline: none;
-    padding: 14px 0cm;
+    padding: 14px 1cm;
     cursor: pointer;
   font-size: 18px;
     border-radius: 8px;
