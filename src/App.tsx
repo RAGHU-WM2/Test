@@ -45,9 +45,48 @@ export default function App() {
     setSelectedLocation(null);
   }, []);
 
+
+
+
+  
+
   useEffect(() => {
     if (mapView && venue) {
+
       mapView.addInteractivePolygonsForAllLocations();
+
+
+
+ // Wayfinding logic
+ const startLocation = venue.locations.find(
+  (location) => location.name === "01-D-001"
+);
+const endLocation = venue.locations.find(
+  (location) => location.name === "Collaboration Space"
+);
+
+if (startLocation && endLocation) {
+  const directions = startLocation.directionsTo(endLocation, {
+    accessible: false,
+  });
+
+  mapView.Journey.draw(directions, {
+    pathOptions: {
+      nearRadius: 2.5,
+      farRadius: 2.5,
+    },
+  });
+}
+
+
+
+
+
+
+
+
+
+
       mapView.on(E_SDK_EVENT.CLICK, ({ polygons }) => {
         mapView.clearAllPolygonColors();
         if (polygons.length > 0) {
@@ -264,6 +303,8 @@ export default function App() {
     [mapView]
   );
 
+
+  
   return (
     <div id="app" ref={elementRef}>
       <div id="selectorDiv">
