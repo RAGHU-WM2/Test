@@ -15,9 +15,15 @@ const options: TGetVenueOptions = {
   clientSecret: "RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1",
 };
 
+interface Polygon {
+  id: string;
+  map: { name: string };
+}
+
 interface Location {
   name: string;
-  polygons: { id: string; map: { name: string } }[];
+  polygons: Polygon[];
+  categories?: { name: string }[];
 }
 
 interface LocationInfo {
@@ -81,12 +87,24 @@ const SearchList: React.FC<SearchListProps> = ({ searchTerm, mapView, venue }) =
   };
 
   const handleLocationClick = (info: LocationInfo) => {
-    // Highlight the polygon
-    mapView.clearAllPolygonColors(); // Clear previous highlights
-    const polygons = venue?.locations.find((loc: Location) => loc.name === info.name)?.polygons;
-    if (polygons?.length) {
-      mapView.setPolygonColor(polygons[0], "grey");
-      mapView.Camera.focusOn({ polygons }, { duration: 500 });
+    // Clear previous highlights
+    mapView.clearAllPolygonColors();
+
+    // Find the selected location
+    const location = venue?.locations.find((loc: Location) => loc.name === info.name);
+    
+    if (location) {
+      const polygons = location.polygons;
+
+      // Highlight all polygons
+      if (polygons?.length) {
+        polygons.forEach((polygon: Polygon) => {
+          mapView.setPolygonColor(polygon, "grey");
+        });
+
+        // Focus the camera on all polygons
+        mapView.Camera.focusOn({ polygons }, { duration: 500 });
+      }
     }
   };
 
